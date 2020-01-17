@@ -29,9 +29,15 @@ This library allows you quickly and easily generate a Google-compatible sitemap 
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\LICENSE.md" Pack="true" PackagePath="$(PackageLicenseFile)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  <!--<ItemGroup>
     <None Include="..\..\LICENSE.md">
       <Pack>True</Pack>
     </None>
-  </ItemGroup>
+  </ItemGroup>-->
 
 </Project>

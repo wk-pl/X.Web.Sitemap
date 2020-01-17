@@ -31,6 +31,9 @@ namespace X.Web.Sitemap
         [XmlElement("priority")]
         public double Priority { get; set; }
 
+        [XmlElement("image", Namespace = "http://www.google.com/schemas/sitemap-image/1.1")]
+        public UrlImage Image { get; set; }
+
         public Url()
         {
         }
@@ -45,5 +48,10 @@ namespace X.Web.Sitemap
                 Priority = 0.5d,
                 TimeStamp = timeStamp,
             };
+
+        public void SetImage(string location, string caption, string title)
+        {
+            this.Image = UrlImage.CreateImage(location, caption, title);
+        }
     }
 }

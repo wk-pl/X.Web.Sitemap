@@ -18,13 +18,16 @@ namespace X.Web.Sitemap
             ValidateArgumentNotNull(objectToSerialize);
 
             var xmlSerializer = new XmlSerializer(typeof(T));
-            
+            var customNamespaces = new XmlSerializerNamespaces();
+            customNamespaces.Add(String.Empty, Constants.Namespaces.RootNamespace);
+            customNamespaces.Add("image", Constants.Namespaces.ImageNamespace);
+
             using (var textWriter = new StringWriterUtf8())
             {
-                xmlSerializer.Serialize(textWriter, objectToSerialize);
+                xmlSerializer.Serialize(textWriter, objectToSerialize, customNamespaces);
                 var xmlString = textWriter.ToString();
                 var path = Path.Combine(targetDirectory.FullName, targetFileName);
-                
+
                 return _fileSystemWrapper.WriteFile(xmlString, path);
             }
         }

@@ -5,59 +5,72 @@ using System.Linq;
 
 namespace X.Web.Sitemap.Tests.UnitTests.SitemapGeneratorTests
 {
-	[TestFixture]
-	public class GenerateSitemapsTests
-	{
-		private SitemapGenerator _sitemapGenerator;
-		private ISerializedXmlSaver<List<Url>> _sitemapSerializer;
+    [TestFixture]
+    public class GenerateSitemapsTests
+    {
+        private SitemapGenerator _sitemapGenerator;
+        private ISerializedXmlSaver<List<Url>> _sitemapSerializer;
 
-		[SetUp]
-		public void SetUp()
-		{
-			_sitemapSerializer = new SerializedXmlSaver<List<Url>>(new TestFileSystemWrapper());
-			_sitemapGenerator = new SitemapGenerator(_sitemapSerializer);
-		}
+        [SetUp]
+        public void SetUp()
+        {
+            _sitemapSerializer = new SerializedXmlSaver<List<Url>>(new TestFileSystemWrapper());
+            _sitemapGenerator = new SitemapGenerator(_sitemapSerializer);
+        }
 
-		[Test]
-		public void It_Only_Saves_One_Sitemap_If_There_Are_Less_Than_50001_Urls()
-		{
-			var filesCount = 4;
-			var recordsCount = (Sitemap.MaxNumberOfUrlsPerSitemap * 3) + 5;
-			var urls = new List<Url>();
+        [Test]
+        public void Generates_Sitemap_With_Image()
+        {
+            var urls = new List<Url>();
 
-			for (var i = 0; i < recordsCount; i++)
-			{
-				urls.Add(new Url());
-			}
+            urls.Add(Url.CreateUrl("https://example.com"));
+            urls[0].SetImage("https://example.com/image.jpg", "Caption of the image", "Title of the image");
 
-			var result = _sitemapGenerator.GenerateSitemaps(urls, new DirectoryInfo("x"), "file");
+            var result = _sitemapGenerator.GenerateSitemaps(urls, new DirectoryInfo("x"), "file");
 
-			Assert.AreEqual(filesCount, result.Count);
-		}
+            Assert.AreEqual(1, result.Count);
+        }
 
-		[Test]
-		public void It_Saves_Two_Sitemaps_If_There_Are_More_Than_50000_Urls_But_Less_Than_100001_And_It_Names_The_Files_With_A_Three_Digit_Suffix_Incrementing_For_Each_One()
-		{
-			//--arrange
-			var enoughForTwoSitemaps = Sitemap.MaxNumberOfUrlsPerSitemap + 1;
-			var urls = new List<Url>(enoughForTwoSitemaps);
-			var filesCount = 2;
+        [Test]
+        public void It_Only_Saves_One_Sitemap_If_There_Are_Less_Than_50001_Urls()
+        {
+            var filesCount = 4;
+            var recordsCount = (Sitemap.MaxNumberOfUrlsPerSitemap * 3) + 5;
+            var urls = new List<Url>();
 
-			for (var i = 0; i < enoughForTwoSitemaps; i++)
-			{
-				urls.Add(new Url());
-			}
+            for (var i = 0; i < recordsCount; i++)
+            {
+                urls.Add(new Url());
+            }
 
-			var fileName = "file";
-			var directory = new DirectoryInfo("x");
+            var result = _sitemapGenerator.GenerateSitemaps(urls, new DirectoryInfo("x"), "file");
 
-			//--act
-			var result = _sitemapGenerator.GenerateSitemaps(urls, directory, fileName);
+            Assert.AreEqual(filesCount, result.Count);
+        }
 
-			Assert.AreEqual(filesCount, result.Count);
-			Assert.True(result.All(o => o.Directory.Name == directory.Name));
-			Assert.True(result.Any(o => o.Name == "file-001.xml"));
-			Assert.True(result.Any(o => o.Name == "file-002.xml"));
-		}
-	}
+        [Test]
+        public void It_Saves_Two_Sitemaps_If_There_Are_More_Than_50000_Urls_But_Less_Than_100001_And_It_Names_The_Files_With_A_Three_Digit_Suffix_Incrementing_For_Each_One()
+        {
+            //--arrange
+            var enoughForTwoSitemaps = Sitemap.MaxNumberOfUrlsPerSitemap + 1;
+            var urls = new List<Url>(enoughForTwoSitemaps);
+            var filesCount = 2;
+
+            for (var i = 0; i < enoughForTwoSitemaps; i++)
+            {
+                urls.Add(new Url());
+            }
+
+            var fileName = "file";
+            var directory = new DirectoryInfo("x");
+
+            //--act
+            var result = _sitemapGenerator.GenerateSitemaps(urls, directory, fileName);
+
+            Assert.AreEqual(filesCount, result.Count);
+            Assert.True(result.All(o => o.Directory.Name == directory.Name));
+            Assert.True(result.Any(o => o.Name == "file-001.xml"));
+            Assert.True(result.Any(o => o.Name == "file-002.xml"));
+        }
+    }
 }
