@@ -1,9 +1,8 @@
 # X.Web.Sitemap 
-[![NuGet version](https://badge.fury.io/nu/xsitemap.svg)](https://badge.fury.io/nu/xsitemap)
-[![Part of awesome .NET Core](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/thangchung/awesome-dotnet-core#tools)
 
 Simple sitemap generator for .NET and .NET Core
-You can download it from nuget.org at http://nuget.org/packages/xsitemap/
+
+~You can download it from nuget.org at http://nuget.org/packages/xsitemap/~
 
 ## Usage example
 
