@@ -24,9 +24,9 @@ namespace X.Web.Sitemap.Tests.UnitTests.SitemapGeneratorTests
             var urls = new List<Url>();
 
             urls.Add(Url.CreateUrl("https://example.com"));
-            urls[0].SetImage("https://example.com/image.jpg", "Caption of the image", "Title of the image");
+            urls[0].AddImage("https://example.com/image.jpg", "Caption of the image", "Title of the image");
 
-            var result = _sitemapGenerator.GenerateSitemaps(urls, new DirectoryInfo("x"), "file");
+            var result = _sitemapGenerator.GenerateSitemaps(urls, new DirectoryInfo("GenerateSitemapsTests"), "file_with_image");
 
             Assert.AreEqual(1, result.Count);
         }
@@ -43,7 +43,7 @@ namespace X.Web.Sitemap.Tests.UnitTests.SitemapGeneratorTests
                 urls.Add(new Url());
             }
 
-            var result = _sitemapGenerator.GenerateSitemaps(urls, new DirectoryInfo("x"), "file");
+            var result = _sitemapGenerator.GenerateSitemaps(urls, new DirectoryInfo("GenerateSitemapsTests"), "file");
 
             Assert.AreEqual(filesCount, result.Count);
         }

@@ -1,7 +1,5 @@
-﻿using NUnit.Framework;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
+using NUnit.Framework;
 
 namespace X.Web.Sitemap.Tests.UnitTests.SitemapGeneratorTests
 {
@@ -22,11 +20,12 @@ namespace X.Web.Sitemap.Tests.UnitTests.SitemapGeneratorTests
         public void Generates_Sitemap_With_Image()
         {
             var url = Url.CreateUrl("https://example.com");
-            url.SetImage("https://example.com/image.jpg", "Caption of the image", "Title of the image");
+            url.AddImage("https://example.com/image1.jpg", "Caption of the image1", "Title of the image1");
+            url.AddImage("https://example.com/image2.jpg", "Caption of the image2", "Title of the image2");
             var sitemap = new Sitemap();
             sitemap.Add(url);
 
-            var result = _sitemapGenerator.GenerateSitemaps(sitemap, new DirectoryInfo("x"), "full_file");
+            var result = _sitemapGenerator.GenerateSitemaps(sitemap, new DirectoryInfo("GenerateFullSitemapsTests"), "full_file");
 
             Assert.AreEqual(1, result.Count);
         }

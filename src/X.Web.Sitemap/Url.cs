@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace X.Web.Sitemap
@@ -32,10 +33,11 @@ namespace X.Web.Sitemap
         public double Priority { get; set; }
 
         [XmlElement("image", Namespace = "http://www.google.com/schemas/sitemap-image/1.1")]
-        public UrlImage Image { get; set; }
+        public List<UrlImage> Images { get; set; }
 
         public Url()
         {
+            Images = new List<UrlImage>();
         }
 
         public static Url CreateUrl(string location) => CreateUrl(location, DateTime.Now);
@@ -49,9 +51,9 @@ namespace X.Web.Sitemap
                 TimeStamp = timeStamp,
             };
 
-        public void SetImage(string location, string caption, string title)
+        public void AddImage(string location, string caption, string title)
         {
-            this.Image = UrlImage.CreateImage(location, caption, title);
+            Images.Add(UrlImage.CreateImage(location, caption, title));
         }
     }
 }
