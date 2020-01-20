@@ -53,7 +53,7 @@ namespace X.Web.Sitemap
             
             for (var i = 0; i < sitemaps.Count; i++)
             {
-                var fileName = $"{sitemapBaseFileNameWithoutExtension}-00{i + 1}.xml";
+                var fileName = $"{sitemapBaseFileNameWithoutExtension}-{(i+1).ToString("000")}.xml";
                 files.Add(_serializedXmlSaver.SerializeAndSave(sitemaps[i], targetDirectory, fileName));
             }
             

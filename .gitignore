@@ -174,3 +174,4 @@ pip-log.txt
 
 .vs/
 .idea/
+/src/X.Web.Sitemap/Properties/PublishProfiles/FolderProfile.pubxml

@@ -25,7 +25,7 @@ namespace X.Web.Sitemap
             _fileSystemWrapper = new FileSystemWrapper();
         }
 
-        public const int MaxNumberOfUrlsPerSitemap = 5000;
+        public const int MaxNumberOfUrlsPerSitemap = 50000;
 
         public virtual string ToXml()
         {
