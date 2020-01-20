@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using X.Web.Sitemap.Constants;
 
 namespace X.Web.Sitemap
 {
@@ -32,7 +33,7 @@ namespace X.Web.Sitemap
         [XmlElement("priority")]
         public double Priority { get; set; }
 
-        [XmlElement("image", Namespace = "http://www.google.com/schemas/sitemap-image/1.1")]
+        [XmlElement("image", Namespace = Namespaces.ImageNamespace)]
         public List<UrlImage> Images { get; set; }
 
         public Url()

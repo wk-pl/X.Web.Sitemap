@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
+using X.Web.Sitemap.Constants;
 
 namespace X.Web.Sitemap
 {
     [Serializable]
-    [XmlRoot(ElementName = "sitemapindex", Namespace = "http://www.sitemaps.org/schemas/sitemap/0.9")]
+    [XmlRoot(ElementName = "sitemapindex", Namespace = Namespaces.RootNamespace)]
     public class SitemapIndex
     {
         private SitemapIndex()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
+using X.Web.Sitemap.Constants;
 
 namespace X.Web.Sitemap
 {
@@ -19,8 +20,8 @@ namespace X.Web.Sitemap
 
             var xmlSerializer = new XmlSerializer(typeof(T));
             var customNamespaces = new XmlSerializerNamespaces();
-            customNamespaces.Add(String.Empty, Constants.Namespaces.RootNamespace);
-            customNamespaces.Add("image", Constants.Namespaces.ImageNamespace);
+            customNamespaces.Add(Namespaces.RootNamespacePrefix, Namespaces.RootNamespace);
+            customNamespaces.Add(Namespaces.ImageNamespacePrefix, Namespaces.ImageNamespace);
 
             using (var textWriter = new StringWriterUtf8())
             {

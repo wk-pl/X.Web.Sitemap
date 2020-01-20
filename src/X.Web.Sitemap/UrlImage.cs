@@ -1,19 +1,20 @@
 ﻿using System.Xml.Serialization;
+using X.Web.Sitemap.Constants;
 
 namespace X.Web.Sitemap
 {
     [Serializable]
-    [XmlRoot(ElementName = "image", Namespace = "http://www.google.com/schemas/sitemap-image/1.1")]
-    [XmlType(Namespace = "http://www.google.com/schemas/sitemap-image/1.1")]
+    [XmlRoot(ElementName = "image", Namespace = Namespaces.ImageNamespace)]
+    [XmlType(Namespace = Namespaces.ImageNamespace)]
     public class UrlImage
     {
-        [XmlElement("loc", Namespace = "http://www.google.com/schemas/sitemap-image/1.1")]
+        [XmlElement("loc", Namespace = Namespaces.ImageNamespace)]
         public string Location { get; set; }
 
-        [XmlElement("caption", Namespace = "http://www.google.com/schemas/sitemap-image/1.1")]
+        [XmlElement("caption", Namespace = Namespaces.ImageNamespace)]
         public string Caption { get; set; }
 
-        [XmlElement("title", Namespace = "http://www.google.com/schemas/sitemap-image/1.1")]
+        [XmlElement("title", Namespace = Namespaces.ImageNamespace)]
         public string Title { get; set; }
 
         public UrlImage()

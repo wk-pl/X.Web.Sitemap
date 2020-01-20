@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using X.Web.Sitemap.Constants;
 using X.Web.Sitemap.Extensions;
 
 [assembly: InternalsVisibleTo("X.Web.Sitemap.Tests")]
@@ -14,7 +15,7 @@ using X.Web.Sitemap.Extensions;
 namespace X.Web.Sitemap
 {
     [Serializable]
-    [XmlRoot(ElementName = "urlset", Namespace = "http://www.sitemaps.org/schemas/sitemap/0.9")]
+    [XmlRoot(ElementName = "urlset", Namespace = Namespaces.RootNamespace)]
     public class Sitemap : List<Url>, ISitemap
     {
         private readonly IFileSystemWrapper _fileSystemWrapper;
